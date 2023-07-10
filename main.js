@@ -1,5 +1,5 @@
 // checking if local storage is empty then add an empty array
-if (localStorage.getItem("AddedBookds") === null) {
+if (localStorage.getItem("AddedBooks") === null) {
     localStorage.setItem("AddedBooks", JSON.stringify([]));
 }
 
@@ -16,40 +16,85 @@ const form = document.querySelector("form");
 form.addEventListener("submit", (e) => {
     const title = document.querySelector(".title");
     const author = document.querySelector(".author");
-    e.preventDefault
+    e.preventDefault();
+    addNewData(title.value, author.value);
 });
 
+function createBooks(arr) {
+    let books = "";
+    for (let i = 0; i < arr.length; i++) {
+        books += `
+            <p> ${arr[i].title} </p>
+            <p> ${arr[i].author} </p>
+            <button onclick="removeBook(${i})">Remove</button>
+            </hr>
+        `;
+    }
+
+    return books;
+}
+
+// Displaying data to the UI from local storage
+function displayBooks() {
+    const listOfBooks = document.querySelector(".booksContainer");
+    listOfBooks.innerHTML = `
+        <ul class="book-ul">
+            ${createBooks(storeData)}</ul>
+    `
+};
+
+// Adding new data in the local storage
+function addNewData(bookTitle, bookAuthor) {
+    const Book = {
+        title: bookTitle,
+        author: bookAuthor,
+    };
+    storeData.push(Book);
+    updateData();
+    displayBooks();
+}
+
+// Removing data from local storage
+function removeBook(i) {
+    storeData.splice(i, 1);
+    updateData();
+    displayBooks();
+}
+
+removeBook();
+
+window.onload = displayBooks();
 
 // ---------------------------------------------------
 
-const booksData = [
-    {
-        Title: "The slide edge",
-        Author: "Jeff Olson"
-    },
-    {
-        Title: "PsychoCybernetics",
-        Author: "Ipsum"
-    },
-    {
-        Title: "The power of now",
-        Author: "Eckart Tolle"
-    },
-];
+// const booksData = [
+//     {
+//         Title: "The slide edge",
+//         Author: "Jeff Olson"
+//     },
+//     {
+//         Title: "PsychoCybernetics",
+//         Author: "Ipsum"
+//     },
+//     {
+//         Title: "The power of now",
+//         Author: "Eckart Tolle"
+//     },
+// ];
 
-const booksContainer = document.querySelector(".booksContainer")
+// const booksContainer = document.querySelector(".booksContainer")
 
 
-function addNewBook() {
-    const newBook = 
-    `<div>
-        <p>${booksData.Title}</p>
-        <p>${booksData.Author}</p>
-        <button class="remove">Remove</button>
-    </div>`
-    booksContainer.appendChild(newBook);
-}
+// function addNewBook() {
+//     const newBook = 
+//     `<div>
+//         <p>${booksData.Title}</p>
+//         <p>${booksData.Author}</p>
+//         <button class="remove">Remove</button>
+//     </div>`
+//     booksContainer.appendChild(newBook);
+// }
 
-function removeBook() {
+// function removeBook() {
     
-}
+// }
