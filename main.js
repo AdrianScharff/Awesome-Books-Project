@@ -6,6 +6,7 @@ if (localStorage.getItem("AddedBooks") === null) {
 // store data into local storage
 const storeData = JSON.parse(localStorage.getItem("AddedBooks"));
 
+// Uncomment the following 3 lines and eliminate this commment
 function updateData() {
     localStorage.setItem("AddedBooks", JSON.stringify(storeData));
 }
@@ -61,40 +62,7 @@ function removeBook(i) {
     displayBooks();
 }
 
-removeBook();
+// Remove the below line and this comment
+// removeBook();
 
 window.onload = displayBooks();
-
-// ---------------------------------------------------
-
-// const booksData = [
-//     {
-//         Title: "The slide edge",
-//         Author: "Jeff Olson"
-//     },
-//     {
-//         Title: "PsychoCybernetics",
-//         Author: "Ipsum"
-//     },
-//     {
-//         Title: "The power of now",
-//         Author: "Eckart Tolle"
-//     },
-// ];
-
-// const booksContainer = document.querySelector(".booksContainer")
-
-
-// function addNewBook() {
-//     const newBook = 
-//     `<div>
-//         <p>${booksData.Title}</p>
-//         <p>${booksData.Author}</p>
-//         <button class="remove">Remove</button>
-//     </div>`
-//     booksContainer.appendChild(newBook);
-// }
-
-// function removeBook() {
-    
-// }
